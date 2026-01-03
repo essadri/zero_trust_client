@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: react_client
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      # ✅ Points to App Server Public IP (so browser can reach it)
+      - VITE_API_URL=/api
+    restart: unless-stopped
